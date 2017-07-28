@@ -70,7 +70,7 @@ public class JasperUtil {
         
         if (extenstion.equalsIgnoreCase(".jrxml")){
             
-            JasperDesign jasperDesign = JRXmlLoader.load(ctx.getJasperContext(), ctx.getContextClass().getResourceAsStream(ctx.getContextPath() + "/" + reportName));
+            JasperDesign jasperDesign = JRXmlLoader.load(ctx.getJasperContext(), ctx.getContextClass().getResourceAsStream((ctx.getContextPath() + "/" + reportName).replace("//", "/")));
             
             JasperCompileManager compilerManager = JasperCompileManager.getInstance(ctx.getJasperContext());
             
@@ -78,7 +78,7 @@ public class JasperUtil {
             
         }else if (extenstion.equalsIgnoreCase(".jasper")){
             
-            return (JasperReport) JRLoader.loadObject(ctx.getJasperContext(), ctx.getContextClass().getResourceAsStream(ctx.getContextPath() + "/" + reportName));
+            return (JasperReport) JRLoader.loadObject(ctx.getJasperContext(), ctx.getContextClass().getResourceAsStream((ctx.getContextPath() + "/" + reportName).replace("//", "/")));
             
         }else{
             throw new Error("Invalid report name");
@@ -101,6 +101,8 @@ public class JasperUtil {
             jasperContext.setClassLoader(aClass.getClassLoader());
 
             contextPath = getPath(packageName);
+            
+            System.out.println(contextPath);
 
             URI jasperURI = null;
             try {
