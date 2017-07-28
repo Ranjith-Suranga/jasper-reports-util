@@ -5,19 +5,32 @@
  */
 package lk.ijse.jasper.test;
 
+import java.util.HashMap;
+import lk.ijse.jasper.JasperUtil;
+import lk.ijse.jasper.Report;
+import net.sf.jasperreports.engine.JasperReportsContext;
+
 /**
  *
  * @author ranjith-suranga
  */
+@Report("lk.ijse.jasper.test")
 public class Test {
-    
+        
     public static void main(String[] args) {
         
-        Report.test("Suranga");
+        JasperUtil.init(Test.class);
+        JasperReportsContext reportContext = JasperUtil.getReportContext();
+        System.out.println(reportContext);
         
+        Test t = new Test();
+        t.a();
         
     }
     
+    public void a(){
+        JasperReportsContext reportContext = JasperUtil.getReportContext();
+        System.out.println("Instance : " + reportContext);        
+    }
+    
 }
-
-
