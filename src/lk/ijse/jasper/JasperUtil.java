@@ -102,8 +102,6 @@ public class JasperUtil {
 
             contextPath = getPath(packageName);
             
-            System.out.println(contextPath);
-
             URI jasperURI = null;
             try {
                 jasperURI = aClass.getResource(contextPath).toURI();
@@ -115,6 +113,7 @@ public class JasperUtil {
                 throw new Error("Invalid report context path");
             }
 
+            System.out.println(aClass.getResource(contextPath).toExternalForm());
             File jasperDIR = new File(jasperURI);
 
             FileResolver jasperFileResolver = new SimpleFileResolver(jasperDIR);
